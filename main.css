@@ -1,0 +1,285 @@
+html, body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #212121;
+    font-size: 18px;
+    line-height: 1.618em;
+    background: #efefef;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%;
+}
+
+#root, #app {
+    width: 100%;
+    height: 100%;
+}
+
+main {
+    font-size: 1em;
+    line-height: 1.618em;
+    color: #757575;
+    padding: 0 20px;
+    max-width: 100%;
+}
+
+.container {
+    max-width: 46rem;
+    margin: 0 auto;
+}
+
+a {
+    color: #EF6C00;
+    text-decoration: none;
+}
+
+#toolbar {
+    color: white;
+    height: 56px;
+    line-height: 56px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 4px;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: calc(100% - 40px);
+    background: #EF6C00;
+    padding: 0px 20px;
+    z-index: 1;
+    user-select: none;
+    -webkit-transition-property: background-color;
+    transition-property: background-color;
+    transition-duration: 0.05s;
+}
+
+#toolbar svg {
+    padding: 16px;
+    margin-right: -16px;
+    margin-left: auto;
+    float: right;
+}
+
+#feed {
+    position: relative;
+    max-height: calc(100% - 56px);
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+#feed > div {
+    width: calc(100% / 4);
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+    transition-duration: .2s;
+}
+
+#feed > div:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 100%;
+}
+
+#overlay {
+    display: block;
+    position: fixed;
+    background-color: #FFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 24px);
+    max-width: calc(46rem - 24px);
+    padding: 12px;
+    visibility: hidden;
+    will-change: transform;
+    bottom: 0;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, 100%, 0);
+    transform: translate3d(-50%, 100%, 0);
+    transition-property: visibility, -webkit-transform;
+    transition-property: visibility, transform;
+    transition-duration: 0.2s;
+    /*transition-delay: 0.1s;*/
+    z-index: 3;
+}
+
+#overlay.opened {
+    visibility: visible;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+}
+
+.layout-horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.layout-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 13px;
+    line-height: 24px;
+    margin: 8px;
+    color: black;
+}
+
+.modal-button {
+    flex: 1;
+    margin: 16px 8px;
+    -webkit-appearance: none;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid #000;
+    background-color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    color: #202020;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 0;
+    outline: none;
+    padding: 8px 24px;
+}
+
+.modal-button > a {
+
+}
+
+input {
+    font-size: 16px;
+    font-weight: 300;
+    color: #202020;
+    border: none;
+    padding: 8px 0;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+    margin: 8px;
+    border-radius: 0;
+}
+
+input[type=text]:focus {
+    border-bottom: 1px solid #EF6C00;
+}
+
+input[type=submit]:focus {
+    background: black;
+    color: white;
+}
+
+#add {
+    background: #EF6C00;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.12), 0 4px 4px 0 rgba(0, 0, 0, 0.24);
+    width: 56px;
+    height: 56px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    border-radius: 50%;
+    transition-duration: .2s;
+    transform: scale3d(1, 1, 1);
+    z-index: 1;
+    outline: none;
+    cursor: pointer;
+}
+
+#background {
+    position: fixed;
+    background: black;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    visibility: hidden;
+    will-change: opacity;
+    opacity: 0;
+    transition-duration: .2s;
+}
+
+#background.visible {
+    opacity: 0.6;
+    visibility: visible;
+}
+
+#preview {
+    position: fixed;
+    height: calc(100% - 56px);
+    top: 56px;
+    background: rgba(0, 0, 0, 1);
+    width: 100%;
+    bottom: 0;
+    visibility: hidden;
+    will-change: transform;
+    transform: translate3d(0, 100%, 0);
+    transition-property: visibility, transform;
+    transition-duration: 0.2s;
+    z-index: 3;
+}
+
+#preview.visible {
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+}
+
+#preview img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#toolbar svg {
+    padding: 16px;
+    margin-right: -16px;
+    margin-left: auto;
+    float: right;
+}
+
+@keyframes example {
+    0% {
+        transform: translate3d(0, calc(100% + 25px), 0);
+    }
+    2.5% {
+        transform: translate3d(0, 0%, 0)
+    }
+    97.5% {
+        transform: translate3d(0, 0%, 0)
+    }
+    100% {
+        transform: translate3d(0, calc(100% + 25px), 0);
+    }
+}
+
+#toast {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    will-change: transform;
+    transform: translate3d(0, calc(100% + 25px), 0);
+    max-width: calc(100% - 156px);
+    transition-duration: 0.2s;
+    background-color: #323232;
+    color: #f1f1f1;
+    padding: 12px 20px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+#toast.opened {
+    animation-name: example;
+    animation-duration: 8s;
+}

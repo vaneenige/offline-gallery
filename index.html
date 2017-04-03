@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Offline Gallery</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <meta name="description" content="A 16kb Preact & Redux based Progressive Web App that offers an offline gallery experience of external images.">
+  <meta name="author" content="Colin van Eenige">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="./manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Color the status bar on mobile devices -->
+  <meta name="theme-color" content="#EF6C00">
+
+  <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+  <div class="no-support-shell">
+    <div id="toolbar">
+      <div class="container">
+        <span>Rainbow Explorer</span>
+      </div>
+    </div>
+    <main>
+      <div class="container">
+        <p>This application is built with <a href="https://preactjs.com/">Preact</a> and requires Javascript to work.</p>
+      </div>
+    </main>
+  </div>
+  <script>
+    document.querySelector('.no-support-shell').outerHTML = ''; 
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+  </script>
+  <script src="./build/bundle.js"></script>
+</body>
+
+</html>
